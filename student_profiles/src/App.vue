@@ -1,17 +1,20 @@
 <template>
   <div id="app">
+    <SearchFilter />
     <Home v-bind:students="students" />
   </div>
 </template>
 
 <script>
-import Home from './components/Home.vue';
 import axios from 'axios';
+import Home from './components/Home.vue';
+import SearchFilter from './components/SearchFilter.vue';
 
 export default {
   name: 'App',
   components: {
-    Home
+    Home,
+    SearchFilter,
   },
   data() {
     return {
@@ -35,8 +38,5 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  /* color: #2c3e50; */
-  /* margin-top: 60px; */
 }
 </style>

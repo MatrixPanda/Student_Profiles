@@ -39,9 +39,11 @@ export default {
         height: 150px;
         margin: 2rem;
     }
+
     p {
         margin-left: 1.3rem;
     }
+    
     h1 {
         text-transform: uppercase;
     }
@@ -50,24 +52,5 @@ export default {
         display: flex;
         border-bottom: 1px solid var(--primary-color);
         font-size: large;
-        /* position: relative; */
-        /* display: flex;
-        cursor: pointer;
-        z-index: 1;
-        background-color: #f5f5f5;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.3vw;
-        font-weight: bold;
-        border: none;
-        border-radius: 10rem;
-        width: 12em;
-        height: 4em;
-        text-align: left;
-        text-decoration: none;
-        margin-top: auto;
-        margin-bottom: auto;   
-        -webkit-transition-duration: 0.4s; 
-        transition-duration: 0.4s; 
-        box-shadow: -0.8rem 0.9rem 20px rgba(66, 66, 66, 0.3); */
     }
 </style>
