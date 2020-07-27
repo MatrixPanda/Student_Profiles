@@ -9,9 +9,13 @@
 
     <div class="profile-container" v-bind:key="student.id" v-for="student in filteredNames">
       <img v-bind:src='student.pic'>
+      
       <div>
-          <button id="expand-button">+</button>
+        <!-- <header> -->
+          <button class="expand-btn" @click="$emit('expand-info', student.id)">+</button>
+
           <h1> {{ student.firstName }} {{ student.lastName }} </h1>
+        <!-- </header> -->
           <div class="details">
             <p>
                 <small>Email: {{ student.email }}</small>
@@ -25,10 +29,8 @@
             </p>
             <ExpandedInfo id="expand" v-bind:student="student" />
           </div>
-          
       </div>
 
-      
     </div>
 
   </div>
@@ -68,41 +70,13 @@ export default {
 
 
 <style scoped>
-    #header {
-        /* position: relative;  */
-        display: inline-block;
-        align-items: top;
-        /* justify-content: space-evenly; */
-        width: 1000px;
-    }
-
     #expand {
-      display: none;
+      /* display: none; */
     }
 
-    #expand-button {
-      right: 0%;
-      margin-right: 1rem;
-      margin-top: 1rem;
-      position: fixed;
-      background-color: white;
-      height: 40px;
-      border-radius: 100%;
-      border: none;
-
-      /* border: 2px solid lightgrey; */
-      /* background-color: #fff;
-      font-size: 16px;
-      height: 2.5em;
-      width: 2.5em;
-      border-radius: 999px;
-      */
-    color: var(--primary-color);
-    cursor: pointer;
-    font-size: 4rem;
-    font-weight: bold;
- 
-    } 
+    /* header {
+      position: relative;
+    } */
 
     img {
         align-self: start;
@@ -126,5 +100,21 @@ export default {
     .details {
         margin-left: 1.3rem;
     }
+    
+    .expand-btn {
+      position: absolute;
+      border: none;
+      background-color: transparent;
+      font-size: 4rem;
+      font-weight: bold;
+      height: 2.5rem;
+      width: 2.5rem;
+      border-radius: 100%; 
+      right: 0%;
+      margin-right: 1.5rem;
+      margin-top: 1rem;
+      color: var(--primary-color);
+      cursor: pointer;
+    } 
 </style>
 
