@@ -1,7 +1,7 @@
 <template>
     <div>
         <form>
-            <input type="text" name="title" placeholder="Search by name">
+            <input id="name-input" type="text" name="title" placeholder="Search by name">
         </form>
     </div>
 </template>
