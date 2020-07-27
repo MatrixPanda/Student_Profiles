@@ -72,7 +72,8 @@ export default {
     },
 
     setId(id) {
-      this.$data.selectedId.set(id, true, true); // Saves ID, expand for that id is set to true
+      // ATTEMPT: A dictionary that saves ID, and expand for id is set to true for constant O(1) access time.
+      this.$data.selectedId.set(id, true, true); 
       console.log("SET: ", this.$data.selectedId.get(id));
       
       if (this.pickedId === id) {
