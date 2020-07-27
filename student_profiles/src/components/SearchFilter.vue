@@ -1,15 +1,26 @@
 <template>
     <div>
         <form>
-            <input id="name-input" type="text" name="title" placeholder="Search by name">
+            <input id="name-input" type="text" v-model="search" placeholder="Search by name">
         </form>
     </div>
 </template>
 
 <script>
 export default {
-    name: "SearchFilter"
-
+    name: "SearchFilter",
+    data() {
+        return {
+            search: ''
+        }
+    },
+    computed: {
+        filteredStudent: function() {
+            return this.students.filter((student) => {
+                return student.firstName.match(this.search);
+            });
+        }
+    }
 }
 </script>
 

@@ -1,5 +1,9 @@
 <template>
   <div class="profile-container">
+    <form>
+        <input id="name-input" type="text" v-model="search" placeholder="Search by name">
+    </form>
+    <div v-bind:key="student.id" v-for="student in students">
     <img v-bind:src='student.pic'>
     <div>
         <h1> {{ student.firstName }} {{ student.lastName }} </h1>
@@ -14,18 +18,33 @@
             <br>
         </p>
     </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Profile",
-  props: ["student"],
+  props: ["students"],
   methods: {
     getAvg(arr) {
         return arr.reduce((a,b) => parseInt(a) + parseInt(b), 0) / arr.length;
     },
-  }
+  },
+
+  data() {
+        return {
+            search: ''
+        }
+    },
+    computed: {
+        filteredStudent: function() {
+            return this.students.filter((student) => {
+                return student.firstName.match(this.search);
+            });
+        }
+    },
+    
 }
 </script>
 
