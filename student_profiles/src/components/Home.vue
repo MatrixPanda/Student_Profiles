@@ -10,6 +10,7 @@
     <div class="profile-container" v-bind:key="student.id" v-for="student in filteredNames">
       <img v-bind:src='student.pic'>
       <div>
+          <button id="expand-button">+</button>
           <h1> {{ student.firstName }} {{ student.lastName }} </h1>
           <div class="details">
             <p>
@@ -24,7 +25,10 @@
             </p>
             <ExpandedInfo id="expand" v-bind:student="student" />
           </div>
+          
       </div>
+
+      
     </div>
 
   </div>
@@ -64,9 +68,41 @@ export default {
 
 
 <style scoped>
+    #header {
+        /* position: relative;  */
+        display: inline-block;
+        align-items: top;
+        /* justify-content: space-evenly; */
+        width: 1000px;
+    }
+
     #expand {
       display: none;
     }
+
+    #expand-button {
+      right: 0%;
+      margin-right: 1rem;
+      margin-top: 1rem;
+      position: fixed;
+      background-color: white;
+      height: 40px;
+      border-radius: 100%;
+      border: none;
+
+      /* border: 2px solid lightgrey; */
+      /* background-color: #fff;
+      font-size: 16px;
+      height: 2.5em;
+      width: 2.5em;
+      border-radius: 999px;
+      */
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 4rem;
+    font-weight: bold;
+ 
+    } 
 
     img {
         align-self: start;
