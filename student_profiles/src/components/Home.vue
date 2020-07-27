@@ -12,7 +12,8 @@
       
       <div>
         <!-- <header> -->
-          <button class="expand-btn" @click="$emit('expand-info', student.id)">+</button>
+          <button class="expand-btn" @click="setId(student.id)">+</button>
+          <!-- <button class="expand-btn" @click="pickedId = student.id">+</button> -->
 
           <h1> {{ student.firstName }} {{ student.lastName }} </h1>
         <!-- </header> -->
@@ -27,7 +28,11 @@
                 <small>Average: {{ getAvg(student.grades) }}%</small>
                 <br>
             </p>
-            <ExpandedInfo id="expand" v-bind:student="student" />
+
+            <!-- <ExpandedInfo id="expand" v-if="$data.selectedId.get(student.id) === true" v-bind:student="student" /> -->
+            
+            <ExpandedInfo id="expand" v-if="pickedId === student.id" v-bind:student="student" />
+            
           </div>
       </div>
 
@@ -45,39 +50,64 @@ export default {
     ExpandedInfo,
   },
   props: ["students"],
+  data() {
+    return {
+        searchName: '',
+        selectedId: new Map(),
+        pickedId: '',
+    }
+  },
+
+  computed: {
+    // Note: First name + SPACE + last name doesn't work
+    filteredNames: function() {
+      var self=this;
+      return this.students.filter(function(student){
+        return student.firstName.toLowerCase().indexOf(self.searchName.toLowerCase())>=0 
+                || student.lastName.toLowerCase().indexOf(self.searchName.toLowerCase())>=0;});
+    }
+  },
+
   methods: {
     getAvg(arr) {
         return arr.reduce((a,b) => parseInt(a) + parseInt(b), 0) / arr.length;
     },
-  },
 
-  data() {
-        return {
-            searchName: ''
-        }
+    setId(id) {
+      this.$data.selectedId.set(id, true, true); // Saves ID, expand for that id is set to true
+      console.log("SET: ", this.$data.selectedId.get(id));
+      
+      if (this.pickedId === id) {
+        this.pickedId = '';
+      } else {
+        this.pickedId = id;
+      }
+
+      // console.log("SET: ", this.$data.selectedId.get(id));
+      // console.log(this.$data.selectedId);
+      // this.expandCheck(id);
+      // return this.$data.selectedId.a = true;
     },
-    computed: {
-        filteredNames: function() {
-          var self=this;
-          return this.students.filter(function(student){
-            return student.firstName.toLowerCase().indexOf(self.searchName.toLowerCase())>=0 
-                   || student.lastName.toLowerCase().indexOf(self.searchName.toLowerCase())>=0;});
-        }
+
+    expandCheck(id) {
+      console.log(id);
+      
+      // if (this.$data.selectedId.get(id) === true) {
+      //   console.log("show TRUE");
+      //   return true;
+      // } else {
+      //   console.log("show FALSE");
+      //   console.log(this.$data.selectedId.get(id));
+      //   return false;
+      // }
     },
+  },
 
 }
 </script>
 
 
 <style scoped>
-    #expand {
-      /* display: none; */
-    }
-
-    /* header {
-      position: relative;
-    } */
-
     img {
         align-self: start;
         border-radius: 100%;
