@@ -11,12 +11,10 @@
       <img v-bind:src='student.pic'>
       
       <div>
-        <!-- <header> -->
           <button class="expand-btn" @click="setId(student.id)">+</button>
           <!-- <button class="expand-btn" @click="pickedId = student.id">+</button> -->
-
           <h1> {{ student.firstName }} {{ student.lastName }} </h1>
-        <!-- </header> -->
+
           <div class="details">
             <p>
                 <small>Email: {{ student.email }}</small>
