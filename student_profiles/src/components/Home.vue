@@ -1,32 +1,43 @@
 <template>
   <div >
-    <input id="name-input" type="text" v-model="search" placeholder="Search by name">
+    <form>
+      <input id="name-input" type="text" v-model="searchName" placeholder="Search by name">
+    </form>
+    <form>
+      <input id="tag-input" type="text" v-model="searchTag" placeholder="Search by tags">
+    </form>
 
     <div class="profile-container" v-bind:key="student.id" v-for="student in filteredNames">
-      <!-- <Profile v-bind:student="student" /> -->
       <img v-bind:src='student.pic'>
       <div>
           <h1> {{ student.firstName }} {{ student.lastName }} </h1>
-          <p>
-              <small>Email: {{ student.email }}</small>
-              <br>
-              <small>Company: {{ student.company }}</small>
-              <br>
-              <small>Skill: {{ student.skill }}</small>
-              <br>
-              <small>Average: {{ getAvg(student.grades) }}%</small>
-              <br>
-          </p>
+          <div class="details">
+            <p>
+                <small>Email: {{ student.email }}</small>
+                <br>
+                <small>Company: {{ student.company }}</small>
+                <br>
+                <small>Skill: {{ student.skill }}</small>
+                <br>
+                <small>Average: {{ getAvg(student.grades) }}%</small>
+                <br>
+            </p>
+            <ExpandedInfo id="expand" v-bind:student="student" />
+          </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
-// import Profile from './Profile.vue';
+import ExpandedInfo from './ExpandedInfo.vue';
 
 export default {
   name: 'Home',
+  components: {
+    ExpandedInfo,
+  },
   props: ["students"],
   methods: {
     getAvg(arr) {
@@ -36,15 +47,15 @@ export default {
 
   data() {
         return {
-            search: ''
+            searchName: ''
         }
     },
     computed: {
         filteredNames: function() {
           var self=this;
           return this.students.filter(function(student){
-            return student.firstName.toLowerCase().indexOf(self.search.toLowerCase())>=0 
-                   || student.lastName.toLowerCase().indexOf(self.search.toLowerCase())>=0;});
+            return student.firstName.toLowerCase().indexOf(self.searchName.toLowerCase())>=0 
+                   || student.lastName.toLowerCase().indexOf(self.searchName.toLowerCase())>=0;});
         }
     },
 
@@ -53,17 +64,17 @@ export default {
 
 
 <style scoped>
+    #expand {
+      display: none;
+    }
+
     img {
-        align-self: center;
+        align-self: start;
         border-radius: 100%;
         border: 1px solid var(--primary-color);
         width: 150px;
         height: 150px;
         margin: 2rem;
-    }
-
-    p {
-        margin-left: 1.3rem;
     }
     
     h1 {
@@ -74,6 +85,10 @@ export default {
         display: flex;
         border-bottom: 1px solid var(--primary-color);
         font-size: large;
+    }
+
+    .details {
+        margin-left: 1.3rem;
     }
 </style>
 

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <SearchFilter />
     <Home v-bind:students="students" />
   </div>
 </template>
@@ -8,13 +7,11 @@
 <script>
 import axios from 'axios';
 import Home from './components/Home.vue';
-import SearchFilter from './components/SearchFilter.vue';
 
 export default {
   name: 'App',
   components: {
     Home,
-    SearchFilter,
   },
   data() {
     return {
@@ -38,5 +35,22 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+form {
+  display: flex;
+}
+
+input[type="text"] {
+  flex: 10;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid var(--primary-color);
+  font-size: large;
+  outline: none;
+}
+input[type="text"]:focus {
+  border: none;
+  border-bottom: 1px solid black;
 }
 </style>

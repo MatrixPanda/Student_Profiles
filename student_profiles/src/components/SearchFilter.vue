@@ -15,12 +15,13 @@ export default {
         }
     },
     computed: {
-        filteredStudent: function() {
-            return this.students.filter((student) => {
-                return student.firstName.match(this.search);
-            });
+        filteredNames: function() {
+          var self=this;
+          return this.students.filter(function(student){
+            return student.firstName.toLowerCase().indexOf(self.search.toLowerCase())>=0 
+                   || student.lastName.toLowerCase().indexOf(self.search.toLowerCase())>=0;});
         }
-    }
+    },
 }
 </script>
 
