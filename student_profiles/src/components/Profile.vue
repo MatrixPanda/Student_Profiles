@@ -10,7 +10,7 @@
        <br>
        <small>Skill: {{ student.skill }}</small>
        <br>
-       <small>Average: {{ student.email }}</small>
+       <small>Average: {{ getAvg(student.grades) }}%</small>
        <br>
 
     </p>
@@ -21,6 +21,11 @@
 export default {
   name: "Profile",
   props: ["student"],
+  methods: {
+    getAvg(arr) {
+        return arr.reduce((a,b) => parseInt(a) + parseInt(b), 0) / arr.length;
+    },
+  }
 }
 </script>
 
